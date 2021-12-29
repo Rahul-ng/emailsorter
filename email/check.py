@@ -100,7 +100,7 @@ def lookup():
     print("\033[92m[+]\033[97m Scanning...")
     for domain in domains:
         try:
-            answers = dns.resolver.query(domain.split("@", 1)[1], 'MX')
+            answers = dns.resolver.resolve(domain.split("@", 1)[1], 'MX')
         except Exception as e:
             print("some error")
             mxRecord = "some error"
@@ -305,11 +305,6 @@ def lookup():
             time.sleep(.200)
     return mxRecord
 
-# print time taken by above function to run and return the time in seconds
-
-
-
-
 
 
 
@@ -317,5 +312,12 @@ if __name__ == "__main__":
     start_time = time.time()
     lookup()
     print("\n\033[91m[!]\033[97m", len(emailAddresses), "emails sorted")
-    print("\n\033[91m[!]\033[97m", "--- %s seconds ---" % (time.time() - start_time))
+    time_took = time.strftime( " Time: %H:%M:%S ", time.gmtime(time.time() - start_time))
+    print("\n\033[91m[!]\033[97m", time_took)
+
+
+
+
+
+
 
